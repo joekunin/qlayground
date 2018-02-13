@@ -1,0 +1,1 @@
+{:rename-macros {}, :renames {}, :use-macros {}, :excludes #{}, :name qlayground-cljs.core, :imports nil, :requires {q quil.core, quil.core quil.core, qlayground-cljs.helpers qlayground-cljs.helpers, m quil.middleware, quil.middleware quil.middleware}, :uses nil, :require-macros {q quil.core, quil.core quil.core}, :doc nil}
