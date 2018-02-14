@@ -7,20 +7,23 @@
 
 (set-current-implementation :vectorz)
 
-(def V (matrix [1 2]))
-
-
 (def w 1600)
-(def h 600)
-(def n 3000)
+(def h 1200)
+(def n 8500)
 (def t (atom  0))
+
+(defn x [attribute]
+  (first attribute))
+
+(defn y [attribute]
+  (last attribute))
 
 (defn particle
   ([]
    (particle 0))
   ([seed]
-   {:position (new PVector (rand w) (rand h))
-    :velocity (new PVector 0 0)
+   {:position (array [(rand w) (rand h)])
+    :velocity (array [0 0])
     :seed seed}   ))
 
 
@@ -35,29 +38,35 @@
 (defn mod-alt [x n]
   (mod (+ n (mod x n)) n))
 
+(defn vec-from-angle [angle]
+  (array [(q/cos angle) (q/sin angle)])  )
+
 
 (defn flow [position]
-  (let [x (.x position)
-        y (.y position) 
-        r (* (q/noise (/ x 100) (/ y 100))
+  (let [r (*(q/noise (/ (x position) 100) (/ (y position) 100))
             q/TWO-PI)]
-    (PVector/mult (PVector/fromAngle r) 2)))
+    (mul (vec-from-angle r) 28)))
 
 
 (defn update-particle [{:keys [position velocity seed] :as particle}]
-  (let [pos-x (mod-alt (+ (.x position) (.x velocity)) w)
-        pos-y (mod-alt (+ (.y position) (.y velocity)) h)
-        position (new PVector pos-x pos-y)
+  (let [px (x position)
+        py (y position)
+        vx (x velocity)
+        vy (y velocity)
 
-        r  (PVector/fromAngle (* q/TWO-PI (q/noise seed @t)))
+        angle (* q/TWO-PI (q/noise seed @t))
 
-        vel-x (.x r)
-        vel-y (.y r)
-        velocity  (new PVector vel-x vel-y)
+        new-px (mod-alt (+ px vx) w)
+        new-py (mod-alt (+ py vy) h)
 
-        new-velocity (PVector/mult (PVector/add velocity (flow position)) 1.2)]
+        new-position (array [new-px new-py])
+        velocity (vec-from-angle angle)
 
-    {:position position
+        new-velocity (mul
+                       (add velocity (flow position))
+                       1.2)]
+
+    {:position new-position
      :velocity new-velocity
      :seed seed}))
 
@@ -79,16 +88,46 @@
 
 (defn draw-state [{:keys [particles]}] 
   (q/no-fill)
-  ;;  (q/stroke 255 0 255 20)
+  ;;(q/stroke 255 0 255 20)
   ;;(q/background 20)
   (swap! t (partial + 0.02) )
 
   (doseq [particle particles]
-    (let [x (.x (:position particle))
-          y (.y (:position particle))]
-      (q/stroke 280 0 280 20;(* 200 (q/atan x))
-        )
-      (q/point x y))))
+    (let [position (:position particle)
+          x (x position)
+          y (y position)]
+      ;;(q/save-frame "field/fieldmirrorcolor-####.png")
+      #_(q/stroke 280 0  250  25;;(* 12 (q/atan x))
+          )
+      (q/stroke (mod x y) (mod x y) (mod x y) 20)
+      (q/point x y)
+
+      (q/push-matrix)
+      (q/translate 0 h)
+      (q/scale (- 1) 1)
+      (q/point x y)
+      (q/pop-matrix)
+
+      (q/push-matrix)
+      (q/translate w 0)
+      (q/scale (- 1) 1)
+      (q/point x y)
+      (q/pop-matrix)
+
+      
+      (q/push-matrix)
+      (q/translate 0 h)
+      (q/scale  1 (- 1))
+      (q/point x y)
+      (q/pop-matrix)
+
+      (q/push-matrix)
+      (q/translate w h)
+      (q/scale (- 1) (- 1 ))
+      (q/point x y)
+      (q/pop-matrix)
+      
+      )))
 
 
 

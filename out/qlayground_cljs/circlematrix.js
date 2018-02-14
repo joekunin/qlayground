@@ -6,12 +6,12 @@ goog.require('quil.middleware');
 qlayground_cljs.circlematrix.intersection = (function qlayground_cljs$circlematrix$intersection(x0,y0){
 return null;
 });
-qlayground_cljs.circlematrix.modify_circle = (function qlayground_cljs$circlematrix$modify_circle(p__41046){
-var vec__41050 = p__41046;
-var x = cljs.core.nth.call(null,vec__41050,(0),null);
-var y = cljs.core.nth.call(null,vec__41050,(1),null);
-var w = cljs.core.nth.call(null,vec__41050,(2),null);
-var h = cljs.core.nth.call(null,vec__41050,(3),null);
+qlayground_cljs.circlematrix.modify_circle = (function qlayground_cljs$circlematrix$modify_circle(p__41049){
+var vec__41053 = p__41049;
+var x = cljs.core.nth.call(null,vec__41053,(0),null);
+var y = cljs.core.nth.call(null,vec__41053,(1),null);
+var w = cljs.core.nth.call(null,vec__41053,(2),null);
+var h = cljs.core.nth.call(null,vec__41053,(3),null);
 return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [x,y,w,h], null);
 });
 qlayground_cljs.circlematrix.setup = (function qlayground_cljs$circlematrix$setup(){
@@ -22,10 +22,10 @@ quil.core.color_mode.call(null,new cljs.core.Keyword(null,"hsb","hsb",-753472031
 return new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"color","color",1011675173),(0),new cljs.core.Keyword(null,"angle","angle",1622094254),(0)], null);
 });
 qlayground_cljs.circlematrix.update_state = (function qlayground_cljs$circlematrix$update_state(state){
-var map__41055 = state;
-var map__41055__$1 = ((((!((map__41055 == null)))?((((map__41055.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__41055.cljs$core$ISeq$)))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__41055):map__41055);
-var color = cljs.core.get.call(null,map__41055__$1,new cljs.core.Keyword(null,"color","color",1011675173));
-var angle = cljs.core.get.call(null,map__41055__$1,new cljs.core.Keyword(null,"angle","angle",1622094254));
+var map__41058 = state;
+var map__41058__$1 = ((((!((map__41058 == null)))?((((map__41058.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__41058.cljs$core$ISeq$)))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__41058):map__41058);
+var color = cljs.core.get.call(null,map__41058__$1,new cljs.core.Keyword(null,"color","color",1011675173));
+var angle = cljs.core.get.call(null,map__41058__$1,new cljs.core.Keyword(null,"angle","angle",1622094254));
 return new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"color","color",1011675173),cljs.core.mod.call(null,(color + 0.2),(255)),new cljs.core.Keyword(null,"angle","angle",1622094254),cljs.core.mod.call(null,(angle + 0.1),quil.core.TWO_PI)], null);
 });
 qlayground_cljs.circlematrix.draw_state = (function qlayground_cljs$circlematrix$draw_state(state){

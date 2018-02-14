@@ -12,10 +12,10 @@ quil.core.color_mode.call(null,new cljs.core.Keyword(null,"hsb","hsb",-753472031
 return qlayground_cljs.lorenz.state;
 });
 qlayground_cljs.lorenz.update_state = (function qlayground_cljs$lorenz$update_state(state){
-var vec__40918 = cljs.core.last.call(null,state);
-var x = cljs.core.nth.call(null,vec__40918,(0),null);
-var y = cljs.core.nth.call(null,vec__40918,(1),null);
-var z = cljs.core.nth.call(null,vec__40918,(2),null);
+var vec__40921 = cljs.core.last.call(null,state);
+var x = cljs.core.nth.call(null,vec__40921,(0),null);
+var y = cljs.core.nth.call(null,vec__40921,(1),null);
+var z = cljs.core.nth.call(null,vec__40921,(2),null);
 var sigma = (10);
 var rho = (28);
 var beta = ((8) / (3));
@@ -26,10 +26,10 @@ var dz = (dt * ((x * y) - (beta * z)));
 return cljs.core.conj.call(null,state,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [(dx + x),(dy + y),(dz + z)], null));
 });
 qlayground_cljs.lorenz.draw_state = (function qlayground_cljs$lorenz$draw_state(state){
-var vec__40924 = cljs.core.last.call(null,state);
-var x = cljs.core.nth.call(null,vec__40924,(0),null);
-var y = cljs.core.nth.call(null,vec__40924,(1),null);
-var z = cljs.core.nth.call(null,vec__40924,(2),null);
+var vec__40927 = cljs.core.last.call(null,state);
+var x = cljs.core.nth.call(null,vec__40927,(0),null);
+var y = cljs.core.nth.call(null,vec__40927,(1),null);
+var z = cljs.core.nth.call(null,vec__40927,(2),null);
 var tr__8948__auto__ = new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(quil.core.width.call(null) / (2)),(quil.core.height.call(null) / (2))], null);
 quil.core.push_matrix.call(null);
 

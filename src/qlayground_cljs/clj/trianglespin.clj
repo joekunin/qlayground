@@ -106,9 +106,7 @@
 
 
       (dotimes [c (/ 360 rotation)]
-
-        (q/ellipse x y r r)
-        
+        (q/ellipse x y r r) 
         (q/rotate (q/radians rotation)))
 
       #_(dotimes [c (/ 360 rotation)]
@@ -116,7 +114,7 @@
           ;; (q/rect x y r r)
           (q/ellipse x y r r)
           (q/rotate (q/radians rotation)))
-      (q/display-filter :invert)
+
       ;;(q/ellipse  x y r r)
       ;; (q/ellipse  (- y) (- x) r r)      
       ;;(q/rect x y r r)
@@ -141,6 +139,7 @@
       ;; (q/triangle 0 0 (- x) (- y) (-  x y) (- y x))
       ;; (q/triangle 0 0 (- y) (- x) (-  x y) (- y x))
       ;;(q/save-frame "trianglespin-circles-####.png")
+
       )))
 
 (q/defsketch trianglespin
