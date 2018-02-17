@@ -142,7 +142,7 @@
 
       )))
 
-(q/defsketch trianglespin
+#_(q/defsketch trianglespin
   :host "host"
   :size [1200 800]
   :setup setup

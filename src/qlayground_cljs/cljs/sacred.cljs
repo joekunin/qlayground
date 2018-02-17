@@ -59,7 +59,7 @@
 
 
 
-(q/defsketch sacred
+#_(q/defsketch sacred
   :host "flower"
   :setup setup
   :update update-state

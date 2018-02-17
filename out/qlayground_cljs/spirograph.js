@@ -23,10 +23,10 @@ return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMP
  *   window. TODO: can quil.core/translate be used instead?
  */
 qlayground_cljs.spirograph.my_translate = (function qlayground_cljs$spirograph$my_translate(delta_x,delta_y){
-return (function (p__41143){
-var vec__41144 = p__41143;
-var x = cljs.core.nth.call(null,vec__41144,(0),null);
-var y = cljs.core.nth.call(null,vec__41144,(1),null);
+return (function (p__41117){
+var vec__41118 = p__41117;
+var x = cljs.core.nth.call(null,vec__41118,(0),null);
+var y = cljs.core.nth.call(null,vec__41118,(1),null);
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(x + delta_x),(y + delta_y)], null);
 });
 });
@@ -35,23 +35,23 @@ return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMP
  * outer circle of radius `R` and parameters `k` and `l`
  */
 qlayground_cljs.spirograph.spirograph = (function qlayground_cljs$spirograph$spirograph(var_args){
-var args41147 = [];
-var len__8435__auto___41150 = arguments.length;
-var i__8436__auto___41151 = (0);
+var args41121 = [];
+var len__8435__auto___41124 = arguments.length;
+var i__8436__auto___41125 = (0);
 while(true){
-if((i__8436__auto___41151 < len__8435__auto___41150)){
-args41147.push((arguments[i__8436__auto___41151]));
+if((i__8436__auto___41125 < len__8435__auto___41124)){
+args41121.push((arguments[i__8436__auto___41125]));
 
-var G__41152 = (i__8436__auto___41151 + (1));
-i__8436__auto___41151 = G__41152;
+var G__41126 = (i__8436__auto___41125 + (1));
+i__8436__auto___41125 = G__41126;
 continue;
 } else {
 }
 break;
 }
 
-var G__41149 = args41147.length;
-switch (G__41149) {
+var G__41123 = args41121.length;
+switch (G__41123) {
 case 2:
 return qlayground_cljs.spirograph.spirograph.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
 
@@ -61,7 +61,7 @@ return qlayground_cljs.spirograph.spirograph.cljs$core$IFn$_invoke$arity$5((argu
 
 break;
 default:
-throw (new Error([cljs.core.str("Invalid arity: "),cljs.core.str(args41147.length)].join('')));
+throw (new Error([cljs.core.str("Invalid arity: "),cljs.core.str(args41121.length)].join('')));
 
 }
 });

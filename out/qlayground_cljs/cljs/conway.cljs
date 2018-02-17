@@ -59,7 +59,7 @@
 
         ))))
 
-(q/defsketch game-of-life
+#_(q/defsketch game-of-life
   :host "host"
   :size [500 500]
   :setup setup

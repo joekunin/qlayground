@@ -98,7 +98,7 @@
 (defn save-frame []
   (q/save (str "iris/iris-" (q/frame-count) ".png")))
 
-(q/defsketch iris
+#_(q/defsketch iris
   :size [600 600]
   :setup setup
   :update update-state

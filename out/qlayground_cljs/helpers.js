@@ -6,23 +6,23 @@ goog.require('cljs.core');
  *   start in direction :up
  */
 qlayground_cljs.helpers.cycle_between = (function qlayground_cljs$helpers$cycle_between(var_args){
-var args40866 = [];
-var len__8435__auto___40872 = arguments.length;
-var i__8436__auto___40873 = (0);
+var args40858 = [];
+var len__8435__auto___40864 = arguments.length;
+var i__8436__auto___40865 = (0);
 while(true){
-if((i__8436__auto___40873 < len__8435__auto___40872)){
-args40866.push((arguments[i__8436__auto___40873]));
+if((i__8436__auto___40865 < len__8435__auto___40864)){
+args40858.push((arguments[i__8436__auto___40865]));
 
-var G__40874 = (i__8436__auto___40873 + (1));
-i__8436__auto___40873 = G__40874;
+var G__40866 = (i__8436__auto___40865 + (1));
+i__8436__auto___40865 = G__40866;
 continue;
 } else {
 }
 break;
 }
 
-var G__40868 = args40866.length;
-switch (G__40868) {
+var G__40860 = args40858.length;
+switch (G__40860) {
 case 2:
 return qlayground_cljs.helpers.cycle_between.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
 
@@ -44,7 +44,7 @@ return qlayground_cljs.helpers.cycle_between.cljs$core$IFn$_invoke$arity$6((argu
 
 break;
 default:
-throw (new Error([cljs.core.str("Invalid arity: "),cljs.core.str(args40866.length)].join('')));
+throw (new Error([cljs.core.str("Invalid arity: "),cljs.core.str(args40858.length)].join('')));
 
 }
 });
@@ -69,13 +69,13 @@ qlayground_cljs.helpers.cycle_between.cljs$core$IFn$_invoke$arity$6 = (function 
 var inc_step__$1 = (((inc_step < (0)))?((-1) * inc_step):inc_step);
 var dec_step__$1 = (((dec_step < (0)))?((-1) * dec_step):dec_step);
 var next = ((cljs.core._EQ_.call(null,new cljs.core.Keyword(null,"up","up",-269712113),direction))?(start + inc_step__$1):(start - dec_step__$1));
-var vec__40869 = ((cljs.core._EQ_.call(null,new cljs.core.Keyword(null,"up","up",-269712113),direction))?(((next > max))?new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(start - dec_step__$1),new cljs.core.Keyword(null,"down","down",1565245570)], null):new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [next,new cljs.core.Keyword(null,"up","up",-269712113)], null)):(((next < min))?new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(start + inc_step__$1),new cljs.core.Keyword(null,"up","up",-269712113)], null):new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [next,new cljs.core.Keyword(null,"down","down",1565245570)], null)));
-var next__$1 = cljs.core.nth.call(null,vec__40869,(0),null);
-var dir = cljs.core.nth.call(null,vec__40869,(1),null);
-return (new cljs.core.LazySeq(null,((function (inc_step__$1,dec_step__$1,next,vec__40869,next__$1,dir){
+var vec__40861 = ((cljs.core._EQ_.call(null,new cljs.core.Keyword(null,"up","up",-269712113),direction))?(((next > max))?new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(start - dec_step__$1),new cljs.core.Keyword(null,"down","down",1565245570)], null):new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [next,new cljs.core.Keyword(null,"up","up",-269712113)], null)):(((next < min))?new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(start + inc_step__$1),new cljs.core.Keyword(null,"up","up",-269712113)], null):new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [next,new cljs.core.Keyword(null,"down","down",1565245570)], null)));
+var next__$1 = cljs.core.nth.call(null,vec__40861,(0),null);
+var dir = cljs.core.nth.call(null,vec__40861,(1),null);
+return (new cljs.core.LazySeq(null,((function (inc_step__$1,dec_step__$1,next,vec__40861,next__$1,dir){
 return (function (){
 return cljs.core.cons.call(null,start,qlayground_cljs.helpers.cycle_between.call(null,next__$1,min,max,inc_step__$1,dec_step__$1,dir));
-});})(inc_step__$1,dec_step__$1,next,vec__40869,next__$1,dir))
+});})(inc_step__$1,dec_step__$1,next,vec__40861,next__$1,dir))
 ,null,null));
 });
 

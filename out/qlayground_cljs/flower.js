@@ -24,11 +24,11 @@ var timestamp = [cljs.core.str(quil.core.year.call(null)),cljs.core.str(quil.cor
 var filename = [cljs.core.str("interference-line-"),cljs.core.str(timestamp)].join('');
 var hw = quil.core.width.call(null);
 var color = new cljs.core.Keyword(null,"color","color",1011675173).cljs$core$IFn$_invoke$arity$1(state);
-var vec__40913 = cljs.core.last.call(null,new cljs.core.Keyword(null,"circles","circles",-1947060917).cljs$core$IFn$_invoke$arity$1(state));
-var x = cljs.core.nth.call(null,vec__40913,(0),null);
-var y = cljs.core.nth.call(null,vec__40913,(1),null);
-var w = cljs.core.nth.call(null,vec__40913,(2),null);
-var h = cljs.core.nth.call(null,vec__40913,(3),null);
+var vec__40896 = cljs.core.last.call(null,new cljs.core.Keyword(null,"circles","circles",-1947060917).cljs$core$IFn$_invoke$arity$1(state));
+var x = cljs.core.nth.call(null,vec__40896,(0),null);
+var y = cljs.core.nth.call(null,vec__40896,(1),null);
+var w = cljs.core.nth.call(null,vec__40896,(2),null);
+var h = cljs.core.nth.call(null,vec__40896,(3),null);
 quil.core.no_fill.call(null);
 
 quil.core.stroke.call(null,(100),(100),(20));

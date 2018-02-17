@@ -4,23 +4,23 @@ goog.require('cljs.core');
 goog.require('quil.core');
 goog.require('quil.middleware');
 qlayground_cljs.wolfram.power = (function qlayground_cljs$wolfram$power(var_args){
-var args41062 = [];
-var len__8435__auto___41065 = arguments.length;
-var i__8436__auto___41066 = (0);
+var args41036 = [];
+var len__8435__auto___41039 = arguments.length;
+var i__8436__auto___41040 = (0);
 while(true){
-if((i__8436__auto___41066 < len__8435__auto___41065)){
-args41062.push((arguments[i__8436__auto___41066]));
+if((i__8436__auto___41040 < len__8435__auto___41039)){
+args41036.push((arguments[i__8436__auto___41040]));
 
-var G__41067 = (i__8436__auto___41066 + (1));
-i__8436__auto___41066 = G__41067;
+var G__41041 = (i__8436__auto___41040 + (1));
+i__8436__auto___41040 = G__41041;
 continue;
 } else {
 }
 break;
 }
 
-var G__41064 = args41062.length;
-switch (G__41064) {
+var G__41038 = args41036.length;
+switch (G__41038) {
 case 2:
 return qlayground_cljs.wolfram.power.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
 
@@ -30,7 +30,7 @@ return qlayground_cljs.wolfram.power.cljs$core$IFn$_invoke$arity$3((arguments[(0
 
 break;
 default:
-throw (new Error([cljs.core.str("Invalid arity: "),cljs.core.str(args41062.length)].join('')));
+throw (new Error([cljs.core.str("Invalid arity: "),cljs.core.str(args41036.length)].join('')));
 
 }
 });
@@ -45,20 +45,20 @@ if(cljs.core._EQ_.call(null,y,(0))){
 return current;
 } else {
 if((y > (0))){
-var G__41069 = x;
-var G__41070 = (y - (1));
-var G__41071 = (x * current);
-x = G__41069;
-y = G__41070;
-current = G__41071;
+var G__41043 = x;
+var G__41044 = (y - (1));
+var G__41045 = (x * current);
+x = G__41043;
+y = G__41044;
+current = G__41045;
 continue;
 } else {
-var G__41072 = x;
-var G__41073 = (y + (1));
-var G__41074 = (current / x);
-x = G__41072;
-y = G__41073;
-current = G__41074;
+var G__41046 = x;
+var G__41047 = (y + (1));
+var G__41048 = (current / x);
+x = G__41046;
+y = G__41047;
+current = G__41048;
 continue;
 }
 }
@@ -69,23 +69,23 @@ break;
 qlayground_cljs.wolfram.power.cljs$lang$maxFixedArity = 3;
 
 qlayground_cljs.wolfram.next_generation = (function qlayground_cljs$wolfram$next_generation(var_args){
-var args41075 = [];
-var len__8435__auto___41078 = arguments.length;
-var i__8436__auto___41079 = (0);
+var args41049 = [];
+var len__8435__auto___41052 = arguments.length;
+var i__8436__auto___41053 = (0);
 while(true){
-if((i__8436__auto___41079 < len__8435__auto___41078)){
-args41075.push((arguments[i__8436__auto___41079]));
+if((i__8436__auto___41053 < len__8435__auto___41052)){
+args41049.push((arguments[i__8436__auto___41053]));
 
-var G__41080 = (i__8436__auto___41079 + (1));
-i__8436__auto___41079 = G__41080;
+var G__41054 = (i__8436__auto___41053 + (1));
+i__8436__auto___41053 = G__41054;
 continue;
 } else {
 }
 break;
 }
 
-var G__41077 = args41075.length;
-switch (G__41077) {
+var G__41051 = args41049.length;
+switch (G__41051) {
 case 0:
 return qlayground_cljs.wolfram.next_generation.cljs$core$IFn$_invoke$arity$0();
 
@@ -95,7 +95,7 @@ return qlayground_cljs.wolfram.next_generation.cljs$core$IFn$_invoke$arity$1((ar
 
 break;
 default:
-throw (new Error([cljs.core.str("Invalid arity: "),cljs.core.str(args41075.length)].join('')));
+throw (new Error([cljs.core.str("Invalid arity: "),cljs.core.str(args41049.length)].join('')));
 
 }
 });
@@ -106,8 +106,8 @@ return qlayground_cljs.wolfram.next_generation.call(null,new cljs.core.Persisten
 
 qlayground_cljs.wolfram.next_generation.cljs$core$IFn$_invoke$arity$1 = (function (generation){
 while(true){
-var G__41082 = cljs.core.concat.call(null,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [(0)], null),cljs.core.println.call(null,cljs.core.map.call(null,qlayground_cljs.wolfram.match_rules,cljs.core.map.call(null,cljs.core.vec,cljs.core.partition.call(null,(3),(1),generation)))),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [(0)], null));
-generation = G__41082;
+var G__41056 = cljs.core.concat.call(null,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [(0)], null),cljs.core.println.call(null,cljs.core.map.call(null,qlayground_cljs.wolfram.match_rules,cljs.core.map.call(null,cljs.core.vec,cljs.core.partition.call(null,(3),(1),generation)))),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [(0)], null));
+generation = G__41056;
 continue;
 break;
 }

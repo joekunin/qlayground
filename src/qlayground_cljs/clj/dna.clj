@@ -44,7 +44,7 @@
       operations
       system)))
 
-(genome)
+#_(genome)
 
 (defn algae
   [steps]

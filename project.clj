@@ -24,6 +24,8 @@
                  [net.mikera/core.matrix "0.62.0"]
                  [net.mikera/vectorz-clj "0.47.0"]]
 
+  :jvm-opts ["-Xms5000m" "-Xmx5000M" "-server"]
+
   :plugins [[lein-cljsbuild "1.1.4"]
             [lein-figwheel "0.5.8" :exclusions [org.clojure/clojure]]
             ;;[cider/cider-nrepl "0.15.0-snapshot"]
@@ -31,14 +33,14 @@
 
   :hooks [leiningen.cljsbuild]
 
-  :cljsbuild
-  {:builds [{:id "main"
-             :source-paths ["src"]
-             :figwheel true
-             :compiler {:output-to "js/main.js" 
-                        :output-dir "out"
-                        :main "qlayground_cljs.core"
-                        :optimizations :none
-                        :pretty-print true}}]}
+  #_:cljsbuild
+  #_{:builds [{:id "main"
+               :source-paths ["src"]
+               :figwheel true
+               :compiler {:output-to "js/main.js" 
+                          :output-dir "out"
+                          :main "qlayground_cljs.core"
+                          :optimizations :none
+                          :pretty-print true}}]}
 
   )

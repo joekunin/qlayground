@@ -129,6 +129,6 @@
   (run-rule (Integer/valueOf rule-num)
     {:width 100 :height 100 :scale 4}))
 
-(-main 10)
-(run-rule (Integer/valueOf 182)
+#_(-main 10)
+#_(run-rule (Integer/valueOf 182)
   {:width 100 :height 100 :scale 10})

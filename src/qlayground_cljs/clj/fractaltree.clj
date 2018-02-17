@@ -51,7 +51,7 @@
   (doseq [[x y angle] state]
     (q/ellipse x y 10 10)))
 
-(q/defsketch fractatree
+#_(q/defsketch fractatree
   :size [500 500]
   :setup setup
   :update update-state

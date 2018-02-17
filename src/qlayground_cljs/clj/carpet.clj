@@ -152,7 +152,7 @@
   )
 
 
-(q/defsketch carpet-fractal
+#_(q/defsketch carpet-fractal
   :size [800 800
          ;;(* scale (count (:carpet init-state)))
          ;;(* scale (count (:carpet init-state)))
