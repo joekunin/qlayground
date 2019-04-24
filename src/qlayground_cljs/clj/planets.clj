@@ -1,9 +1,9 @@
-b(ns qlayground-cljs.clj.planets
-   (:require [quil.core :as q]
-             [quil.middleware :as m]
-             ;; [infix.macros :only [infix $=]]
+(ns qlayground-cljs.clj.planets
+  (:require [quil.core :as q]
+            [quil.middleware :as m]
+            ;; [infix.macros :only [infix $=]]
 
-             [quil.core :as qc])  )
+            [quil.core :as qc])  )
 
 
 
@@ -58,15 +58,15 @@ b(ns qlayground-cljs.clj.planets
 ;; var sizeOffset = (cos(strandPhase - (row / numRows) + colOffset) + 1) * 0.5;
 
 
-#_(q/defsketch planets
-    :size [800 550]
-    :setup setup
-    :update update-state
-    :draw draw-state
-    :renderer :p3d
-    :middleware [m/fun-mode
-                 ;;  m/navigation-3d
-                 m/pause-on-error])
+(q/defsketch planets
+  :size [800 550]
+  :setup setup
+  :update update-state
+  :draw draw-state
+  :renderer :p3d
+  :middleware [m/fun-mode
+               ;;  m/navigation-3d
+               m/pause-on-error])
 
 
 

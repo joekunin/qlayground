@@ -30,7 +30,7 @@
    of the rule to outputs"
 
   (:require [quil.core :as qc]
-	    [clojure.pprint :refer :all])
+            [clojure.pprint :refer :all])
   (:import java.lang.Math))
 
 
@@ -125,10 +125,34 @@
               (swap! time-slices (fn [_] (rest @time-slices))))
       :size [(* scale width) (* scale height)])))
 
-(defn -main [rule-num & args]
-  (run-rule (Integer/valueOf rule-num)
-    {:width 100 :height 100 :scale 4}))
 
-#_(-main 10)
-#_(run-rule (Integer/valueOf 182)
-  {:width 100 :height 100 :scale 10})
+
+(run-rule (Integer/valueOf 183)
+  {:width 100 :height 100 :scale 6}  )
+
+
+
+
+(defn neighbors [[x y]]
+  (for [dx [-1 0 1]
+        dy (if (zero? dx) [-1 1] [-1 0 1])]
+    [(+ dx x) (+ dy y)]))
+
+(defn step [cells]
+  (set
+    (for [[loc n] (frequencies (mapcat neighbors cells))
+          :when (> 5 n)
+          ;; :when (or (= n 3) (and (= n 2) (cells loc)))
+          ]
+      loc)))
+
+
+(defn initial-world
+  [rows columns]
+  (set
+    (for [x (range rows)
+          y (range columns)]
+      [x y])))
+
+
+(pprint (take 2 (iterate step (initial-world 10 10))))

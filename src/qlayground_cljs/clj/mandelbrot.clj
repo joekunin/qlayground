@@ -1,7 +1,11 @@
 (ns qlayground-cljs.clj.mandelbrot
   (:require [quil.core :as q]
             [quil.middleware :as m]
-            [mikera.image.core :as image]))
+            [mikera.image.core :as image])
+  (:use
+   [random-seed.core :refer :all]
+   [clojure.core.matrix]
+   [clojure.core.matrix.operators]))
 
 
 ;; Complex Math
@@ -126,4 +130,78 @@
     (image/show bi ;;"png" (File. "mandelbrot.png")
       )))
 
+
+
+(defn mandel-3d [[x y z]]
+  (let [r (q/sqrt (+
+                    (square x)
+                    (square y)
+                    (square z)))
+        y-ang (q/atan2
+                (sqrt (+ (square x)
+                        (square y)))
+                z)
+        z-ang (q/atan2 y x)
+        new-x  (* (square r)
+                 (q/sin (+ (* 2 y-ang)
+                          (* q/PI 0.5)))
+                 (q/cos (+ (* 2 z-ang ) q/PI)))
+        new-y  (* (square r)
+                 (q/sin (+ (* 2 y-ang)
+                          (* q/PI 0.5)))
+                 (q/sin (+ (* 2 z-ang ) q/PI)))
+        new-z  (* (square r)
+                 (q/cos (+ (* 2 y-ang)
+                          (* q/PI 0.5))))        ]
+    [ new-x new-y new-z]))
+
+(defn mandel-3d-stream
+  ([] (mandel-3d-stream [3 3 3]))
+  ([coords] (iterate mandel-3d coords)))
+
+
+
+
+
+
+#_(defn mandel
+    [x y z]
+    (for [i (range 32)]
+      (let [n 8
+            r (sqrt (+ (square x)
+                      (square y)
+                      (square z)))
+            theta (q/atan2 (sqrt (+ (square x) (square y))) z)
+            phi (q/atan2 y x)
+            dx (+ x (* (pow r n)
+                      (q/sin (* n theta))
+                      (q/cos (* n phi))))
+            dy (+ y (* (pow r n)
+                      (q/sin (* n theta))
+                      (q/cos (* n phi))))
+            dz (+ z (* (pow r n)
+                      (q/cos (* n theta))))            ]
+        (if (> (+ (pow dx 2)
+                 (pow dy 2)
+                 (pow dz 2)) 2)
+          (- 256 (* 4 i))
+          0))))
+
+(defn mandelbrot-function
+  [w h xx yy layers]
+  (for [layer (range layers)
+        :let [x (/ (* (- xx (/ w 2.0)) 4.0) w)
+              y (/ (* (- yy (/ h 2.0)) 4.0) h)
+              z (/ layer 50.0)
+              m (mandel x y z)] ] 
+    m;;[m m m]
+    ))
+
+
+
+
+#_(for [y (range 2)]
+    (for [x (range 2)
+          :let [w 100 h 100]]
+      (mandelbrot-function w h x y 1)))
 #_(-main)

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Leiningen: net.mikera/clisk:0.11.0">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/net/mikera/clisk/0.11.0/clisk-0.11.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

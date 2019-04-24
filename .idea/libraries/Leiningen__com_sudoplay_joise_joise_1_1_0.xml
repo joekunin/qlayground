@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Leiningen: com.sudoplay.joise/joise:1.1.0">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/sudoplay/joise/joise/1.1.0/joise-1.1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

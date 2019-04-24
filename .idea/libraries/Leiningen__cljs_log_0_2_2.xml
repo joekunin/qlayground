@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Leiningen: cljs-log:0.2.2">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/cljs-log/cljs-log/0.2.2/cljs-log-0.2.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

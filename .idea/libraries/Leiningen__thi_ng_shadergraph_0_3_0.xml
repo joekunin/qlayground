@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Leiningen: thi.ng/shadergraph:0.3.0">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/thi/ng/shadergraph/0.3.0/shadergraph-0.3.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

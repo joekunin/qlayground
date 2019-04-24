@@ -1,27 +1,75 @@
-
 (ns qlayground-cljs.clj.particle
   (:require [quil.core :as q]
-            [clojure.core.async :as a])
-  (:use [clojure.core.matrix]
-        [clojure.core.matrix.operators])
-  (:import [processing.core PVector])  )
+            [clojure.core.async :as a]
+            [thi.ng.math.core :as m]
+            [thi.ng.geom.core.vector :as v])
+  (:use
+   [random-seed.core :refer :all]   
+   [clojure.core.matrix]
+   [clojure.core.matrix.operators]))
 
 
 (set-current-implementation :vectorz)
+
+
+;; (def settings 
+;;   {:x-max 1000 
+;;    :y-max 1000
+;;    :v-max 100
+;;    :dv-max 100
+;;    :wih 0
+;;    :who 0 
+;;    :name ""})
+
+;; (defn organism [args]
+;;   {:x (rand-int (or (:x-max args) 400))                ; x position
+;;    :y (rand-int (or (:y-max args) 400))                               ; y position
+;;    :r (rand-int 360) ; orientation [0, 360]
+;;    :v (rand-int (or (:v-max args) 100)) ;; velocity [0, v_max]
+;;    :dv (rand-int (or (:dv-max args) 100))             ;; dv
+;;    :d-food 0 ;;distance to nearest food
+;;    :r-food 0 ;; orientation to nearest food
+;;    :fitness 0 ;; fitness: food count
+;;    :wih (or (:wih args))
+;;    :who (or (:who args))
+;;    :name (or (:name args))})
+
+
+;; (defn think
+;;   [organism]
+;;   organism)
+
+;; (defn update-r
+;;   [organism settings]
+;;   organism)
+
+;; (defn update-vel
+;;   [organism settings]
+;;   organism)
+
+;; (defn update-pos
+;;   [organism settings]
+;;   organism)
+
+
 
 (defn x [attribute]
   (first attribute))
 
 (defn y [attribute]
+  (nth attribute 1))
+
+(defn z [attribute]
   (last attribute))
 
 (defn particle
   ([]
-   (particle 0))
+   (particle 0 100 100))
   ([seed w h]
-   {:position (array [(rand w) (rand h)])
-    :velocity (array [0 0])
-    :seed seed}   ))
+   (let []
+     {:position (array [(rand w) (rand h)])
+      :velocity (array [0 0])
+      :seed seed})))
 
 (defn particles [n w h]
   (loop [particles []
@@ -30,6 +78,12 @@
       particles
       (recur (conj particles (particle index w h)) (inc index)))))
 
+(defn seed-noise
+  [seed]
+  (clisk.noise.Perlin/seed seed ))
+
+(defn seed-random [seed]
+  (set-random-seed! seed))
 
 (defn mod-alt [x n]
   (mod (+ n (mod x n)) n))
@@ -37,23 +91,19 @@
 (defn vec-from-angle [angle]
   (array [(q/cos angle) (q/sin angle)])  )
 
-
 (defn flow [position]
-  (let [r (*(q/noise (/ (x position) 100) (/ (y position) 100))
+  (let [r (* (clisk.noise.Perlin/noise (/ (x position) 100) (/ (y position) 100))
             q/TWO-PI)]
     (mul (vec-from-angle r) 23)))
 
 
-
-;; TODO: Refactor to not rely on frame-count (use incrementing variable, and width/height (implementation dependent, should be particle dependent)
-
-(defn update-particle [w h {:keys [position velocity seed] :as particle}]
+(defn update-particle [w h t {:keys [position velocity seed] :as particle}]
   (let [px (x position)
         py (y position)
         vx (x velocity)
         vy (y velocity)
 
-        angle (* q/TWO-PI (q/noise seed (q/frame-count)))
+        angle (* q/TWO-PI (clisk.noise.Perlin/noise seed t))
 
         new-px (mod-alt (+ px vx) w)
         new-py (mod-alt (+ py vy) h)
@@ -63,15 +113,28 @@
 
         new-velocity (mul
                        (add velocity (flow position))
-                       2.2)]
+                       (* (* 0.003 angle) (q/mouse-x)))]
 
     {:position new-position
      :velocity new-velocity
      :seed seed}))
 
+(defn update-particles [w h t particles]
+  (pmap  (partial  update-particle w h t) particles))
 
-(defn update-particles [w h particles]
-  (map  (partial  update-particle w h) particles))
+
+#_(defn state-stream
+    [state]
+    (iterate update-state state))
+
+#_(def coordinates
+    (let [particles (map :particles  (take 300 (state-stream (state))))
+          states (flatten (map (fn [state-slice] (map :position state-slice)) particles ))
+          coordinates (map (fn [coord] [(p/x coord) (p/y coord)])  states)]
+      coordinates))
+
+
+
 ;; (defprotocol Massive
 ;;   (apply-force [this force] "apply force to the massive object"))
 

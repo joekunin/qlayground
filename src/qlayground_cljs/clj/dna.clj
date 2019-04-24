@@ -44,7 +44,7 @@
       operations
       system)))
 
-#_(genome)
+(genome)
 
 (defn algae
   [steps]
@@ -52,14 +52,16 @@
                     \b "-a+"}
         start      "a"
         angle      45;;(* 2 Math/PI (/ 60 360))
-        operations {\a (partial forward 50)
-                    \b (partial forward 50)
-                    \- (partial rotate (- angle))
-                    \+ (partial rotate angle)}
-        system     (l-system rules steps start)]
-    (run-turtle (doto (create-turtle 900 900)
-                  (.translate 450 450)
-                  (.rotate (/ Math/PI -2)))
+        operations {\a (partial l/forward 50)
+                    \b (partial l/forward 50)
+                    \- (partial l/rotate (- angle))
+                    \+ (partial l/rotate angle)}
+        system     (l/l-system rules steps start)]
+    (l/run-turtle
+      (doto (l/create-turtle 900 900
+              )
+        (.translate 450 450)
+        (.rotate (/ Math/PI -2)))
       operations
       system)))
 
@@ -84,6 +86,7 @@
 
 #_(genome)
 ;;(penrose 9)
+
 
 ;; Axiom: 
 ;; [N]++[N]++[N]++[N]++[N]

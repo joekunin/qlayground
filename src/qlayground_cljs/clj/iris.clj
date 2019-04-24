@@ -30,9 +30,7 @@
 
 (defn setup []
   (q/no-fill)
-  (q/smooth 8)
-
-  
+  (q/smooth 8) 
   (for [p (range particle-count)]
     (let [angle (rand q/TWO-PI)
           r (+
@@ -54,7 +52,7 @@
   )
 
 
-(points-seq 100)
+
 
 (defn points-seq [n]
   (loop [points []]
@@ -66,14 +64,12 @@
         points
         (recur (conj points pa pb))))))
 
-(let [points []]
-  (conj points [0.001 940.2]))
 
-(loop [state initial-state]
-  (when-not (quit-signaled?)
-    (let [new-state (do-things state)]
-      (sleep)
-      (recur new-state))))
+#_(loop [state initial-state]
+    (when-not (quit-signaled?)
+      (let [new-state (do-things state)]
+        (sleep)
+        (recur new-state))))
 
 
 (defn draw-state [state]
@@ -81,7 +77,7 @@
   (q/stroke-weight 1)
   (q/with-translation [(/ (q/width) 2) (/ (q/height) 2)]
     (q/scale 5.25)
-    (doseq [i (take 100 points)]
+    (doseq [i (points-seq 300)]
       (ph/timestep p 2)
       (let [pa (ph/position a)
             pb (ph/position b)]
@@ -98,7 +94,7 @@
 (defn save-frame []
   (q/save (str "iris/iris-" (q/frame-count) ".png")))
 
-#_(q/defsketch iris
+(q/defsketch iris
   :size [600 600]
   :setup setup
   :update update-state
