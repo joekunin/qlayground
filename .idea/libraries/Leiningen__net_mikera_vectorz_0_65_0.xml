@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Leiningen: net.mikera/vectorz:0.65.0">
-    <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/net/mikera/vectorz/0.65.0/vectorz-0.65.0.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

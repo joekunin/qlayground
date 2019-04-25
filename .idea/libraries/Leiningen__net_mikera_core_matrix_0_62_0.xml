@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Leiningen: net.mikera/core.matrix:0.62.0">
-    <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/net/mikera/core.matrix/0.62.0/core.matrix-0.62.0.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

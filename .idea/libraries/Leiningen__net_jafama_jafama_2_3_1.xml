@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Leiningen: net.jafama/jafama:2.3.1">
-    <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/net/jafama/jafama/2.3.1/jafama-2.3.1.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Leiningen: org.jogamp.gluegen/gluegen-rt:2.3.2:natives-macosx-universal">
-    <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/jogamp/gluegen/gluegen-rt/2.3.2/gluegen-rt-2.3.2-natives-macosx-universal.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

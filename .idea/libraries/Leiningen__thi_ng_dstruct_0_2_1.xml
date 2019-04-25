@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Leiningen: thi.ng/dstruct:0.2.1">
-    <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/thi/ng/dstruct/0.2.1/dstruct-0.2.1.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
