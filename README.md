@@ -1,5 +1,8 @@
 # Qlayground - A quil playground exploring generative art using Clojure(script)
 
+## About
+
+This is a repo of experimentation in generative art. I find Clojure to be a really enjoyable language for this project, given that it allows thinking of programs as flows of data transformations. Some of these scripts are functional, some are not, some are a work in progress. Many have commented out code that is the remnant of how these programs are generally run, that is, in a REPL, modifying the animation to achieve interesting results. The renders below are mostly all static screenshots of animations. This project is very much a playground, and an always evolving work in progress.
 
 
 ## Renders:
