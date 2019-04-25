@@ -6,9 +6,13 @@ This is a repo of experimentation in generative art. I find Clojure to be a real
 
 Some of my favorite sketches include:
 ![VectorField](https://github.com/joekunin/qlayground/blob/master/src/qlayground_cljs/clj/vectorfield.clj)
+
 ![Dejong](https://github.com/joekunin/qlayground/blob/master/src/qlayground_cljs/clj/dejong.clj)
+
 ![CircleSpin](https://github.com/joekunin/qlayground/blob/master/src/qlayground_cljs/clj/circlespin.clj)
+
 ![DNA Walker](https://github.com/joekunin/qlayground/blob/master/src/qlayground_cljs/clj/dna.clj)
+
 ![Triangle Spin](https://github.com/joekunin/qlayground/blob/master/src/qlayground_cljs/clj/trianglespin.clj)
 
 ## Renders:
