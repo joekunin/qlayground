@@ -1,6 +1,6 @@
 (ns qlayground-cljs.clj.particle
   (:require [quil.core :as q]
-            [clojure.core.async :as a]
+            ;;[clojure.core.async :as a]
             [thi.ng.math.core :as m]
             [thi.ng.geom.core.vector :as v])
   (:use

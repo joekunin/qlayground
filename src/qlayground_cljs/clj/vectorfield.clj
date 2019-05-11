@@ -1,4 +1,3 @@
-
 (ns qlayground-cljs.clj.vectorfield
   (:require [clojure.core.matrix.operators :refer :all]
             [qlayground-cljs.clj.helpers :as h]
@@ -7,7 +6,7 @@
             [quil.middleware :as m]
             [random-seed.core :refer :all]
             [thi.ng.geom.circle :as c]
-            [thi.ng.geom.core :as g])  )
+            [thi.ng.geom.core :as g]))
 
 
 
