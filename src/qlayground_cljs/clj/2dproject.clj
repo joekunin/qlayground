@@ -13,8 +13,8 @@
 (set! *warn-on-reflection* true)
 (set! *unchecked-math* :warn-on-boxed)
 
-(def WIDTH 800)
-(def HEIGHT 800)
+(def WIDTH 900)
+(def HEIGHT 900)
 (def DOTS-AMOUNT 1000)
 (def DOTS-RADIUS 4)
 (def GLOBE-RADIUS (* WIDTH 0.7) )
@@ -32,14 +32,24 @@
    :y-projection 0
    :size-projection 0})
 
-(defn create-dots
-  [n radius center-z]
-  (let [theta (* Math/PI 2 (rand))
-        phi (Math/acos (- (* 2 (rand)) 1))
+(defn new-theta! []
+  (Math/floor
+    (* Math/PI 2 (* 100 (rand)))))
+
+(defn new-phi! []
+  (Math/acos (- (* 2  (rand)) 1)))
+
+(defn new-point! [radius center-z]
+  (let [theta (new-theta!)
+        phi (new-phi!)
         x (* radius (Math/sin phi) (Math/cos theta))
         y (* radius (Math/sin phi) (Math/sin theta))
-        z (+ (* radius (Math/cos phi)) center-z)
-        points (repeat n [x y z])
+        z (+ (* radius (Math/cos phi)) center-z)]
+    [x y z]))
+
+(defn create-dots
+  [n radius center-z]
+  (let [points (repeatedly n (partial new-point! radius center-z))
         dots (map create-dot points)]
     dots))
 
@@ -72,25 +82,25 @@
   (q/frame-rate 60)
   (q/color-mode :hsb)
   (q/background 20)
-  (create-dots DOTS-AMOUNT GLOBE-RADIUS GLOBE-CENTER-Z))
+  (create-dots DOTS-AMOUNT GLOBE-RADIUS GLOBE-CENTER-Z)  )
 
 (defn update-state
   [state]
   state)
 
 (defn draw-state [state]
-  (let [rotation (* (q/frame-count) 0.04)
+  (let [rotation (* (q/frame-count) 0.004)
         sine-rotation (Math/sin rotation)
         cos-rotation (Math/cos rotation)]
-
+    (q/background 20)
+    ;;(q/scale 0.4)
     (doseq [dot state]
-
       (draw-dot dot sine-rotation cos-rotation )))  )
 
 
 (q/defsketch project2d
   :renderer :p3d
-  :size [900 900]
+  :size [WIDTH HEIGHT]
   :setup setup
   :update update-state
   :draw draw-state
