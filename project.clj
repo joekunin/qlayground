@@ -10,6 +10,9 @@
                  [scad-clj "0.5.2"]
                  [reagent "0.6.0"]
                  ;;[figwheel-sidecar "0.5.0-SNAPSHOT"]
+                 [generateme/fastmath "1.3.0-SNAPSHOT"]
+                 [clojure2d "1.2.0-SNAPSHOT"]
+                 [net.littleredcomputer/sicmutils "0.10.0"]
 
                  [org.clojure/core.match "0.3.0-alpha4"]
                  [org.clojure/core.async "0.3.443" :exclusions [org.clojure/clojure] ]
@@ -20,8 +23,6 @@
                  [thi.ng/luxor "0.3.1"]
                  [thi.ng/common "0.3.1"]
                  [thi.ng/morphogen "0.1.1"]
-
-
 
                  [net.mikera/imagez "0.12.0"]
                  [org.clojars.serabe/rinzelight "0.0.4"]
@@ -34,8 +35,8 @@
                  [rm-hull/infix "0.3.0"]
                  [net.mikera/core.matrix "0.62.0"]
                  [net.mikera/vectorz-clj "0.47.0"]
-                 [clojure2d "0.0.7-SNAPSHOT"]
-                 [random-seed "1.0.0"]] 
+
+                 [random-seed "1.0.0"]]
 
   ;;  :jvm-opts ["-Xms5000m" "-Xmx5000M" "-server"]
 

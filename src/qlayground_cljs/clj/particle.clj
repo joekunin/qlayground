@@ -2,7 +2,8 @@
   (:require [quil.core :as q]
             ;;[clojure.core.async :as a]
             [thi.ng.math.core :as m]
-            [thi.ng.geom.core.vector :as v])
+            ;;[thi.ng.geom.core.vector :as v]
+            )
   (:use
    [random-seed.core :refer :all]   
    [clojure.core.matrix]

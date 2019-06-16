@@ -2,7 +2,7 @@
 (ns qlayground-cljs.clj.2dproject
   (:require [clojure.core.matrix.operators :refer :all]
             [qlayground-cljs.clj.helpers :as h]
-            ;;[qlayground-cljs.clj.particle :as p]
+            [qlayground-cljs.clj.particle :as p]
             [quil.core :as q]
             [quil.middleware :as m]
             ;;[random-seed.core :refer :all]
@@ -35,19 +35,6 @@
      :field-of-view    field-of-view
      :dots             dots}))
 
-
-
-;;(def WIDTH 900)
-;;(def HEIGHT 900)
-;;(def DOTS-AMOUNT 5000)
-;;(def DOTS-RADIUS 1)
-;;(def GLOBE-RADIUS (* WIDTH 0.7) )
-;;(def GLOBE-CENTER-Z (- GLOBE-RADIUS))
-;;(def PROJECT-CENTER-X (/ WIDTH 2))
-;;(def PROJECT-CENTER-Y (/ HEIGHT 2))
-                                        ;(def FIELD-OF-VIEW (* WIDTH 0.8))
-
-
 (defn new-theta! []
   (Math/floor
     (* Math/PI 2 (* 100 (rand)))))
@@ -79,26 +66,43 @@
         dots (pmap create-dot points)]
     dots))
 
+
+
+
 (defn project-dot
   [{:keys [globe-center-z field-of-view project-center-x project-center-y ]}
    {:keys [x y z x-projection y-projection size-projection]} sin cos]
-  (let [rot-x (+ (* cos x) (* sin (- z globe-center-z)))
+  (let [a  20
+        c  40
+        tx (+ c  (* a (Math/cos cos)) (Math/cos sin))
+        ty (+ c  (* a (Math/cos cos)) (Math/sin sin))
+        tz (*  a (Math/sin cos))
+
+        rot-tx (+ (* cos tx) (* sin (- tz globe-center-z)))
+        rot-tz (+ (* (- sin) tx) (* cos (- tz globe-center-z))  globe-center-z)
+        tsp (/ field-of-view (- field-of-view rot-tz))
+        txp (+ project-center-x (* rot-tx tsp ))
+        typ (+ project-center-y (* ty tsp))
+
+        rot-x (+ (* cos x) (* sin (- tz globe-center-z)))
         rot-z (+ (* (- sin) x) (* cos (- z globe-center-z))  globe-center-z)
-        sp (/ field-of-view (- field-of-view rot-z))
-        xp (+ project-center-x (* rot-x sp))
-        yp (+ project-center-y (* y sp))
+        sp    (/ field-of-view (- field-of-view rot-z))
+        xp    (+ project-center-x (* rot-x sp ))
+        yp    (+ project-center-y (* y sp))
+
+
         ]
-    {:x x
-     :y y
-     :z z
-     :x-projection xp
-     :y-projection yp
+    {:x               x
+     :y               y
+     :z               z
+     :x-projection    xp
+     :y-projection    yp
      :size-projection sp}))
 
 (defn draw-dot
   [state dot sin cos]
   (let [{:keys [x y z x-projection y-projection size-projection]} (project-dot state dot sin cos)]
-    (q/fill 255 0 255)
+    (q/fill 255 0 255 )
     (q/color 255 0 255)
     (q/stroke 255 0 255)
     (q/ellipse x-projection y-projection size-projection size-projection)))
@@ -121,7 +125,7 @@
 
 (defn draw-state
   [state]
-  (let [rotation (* (q/frame-count) 0.004)
+  (let [rotation (* (q/frame-count) 0.04)
         sine-rotation (Math/sin rotation)
         cos-rotation (Math/cos rotation)]
     (q/background 20) 

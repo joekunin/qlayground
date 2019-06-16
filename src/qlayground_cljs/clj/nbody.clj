@@ -6,7 +6,7 @@
             [quil.middleware :as m]
             [random-seed.core :refer :all]
             [thi.ng.geom.circle :as c]
-            [thi.ng.geom.core :as g]))
+            [thi.ng.geom.core :as g])  )
 
 (def G  6.674e-11)
 (def AU 150e9)
