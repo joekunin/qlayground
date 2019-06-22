@@ -3,6 +3,7 @@
             [clojure2d.core :refer :all]
             [fastmath.core :as m]
             [clojure2d.pixels :as p]
+            [clojure2d.extra.glitch :as g]
             [qlayground-cljs.clj.helpers :as h]
             ;;[qlayground-cljs.clj.particle :as p]
             [quil.core :as q]
@@ -11,66 +12,71 @@
             ;;[thi.ng.geom.circle :as c]
             ;;[thi.ng.geom.core :as g]
             [clojure.math.numeric-tower :as math]
-            [infix.macros]
             ;;[thi.ng.math.macros :as mm]
-            )
-  #_ (:use
-      [random-seed.core :refer :all]
-      [clojure.core.matrix]
-      [clojure.core.matrix.operators]))
+            [infix.macros])
+
+  (:import
+   [java.awt.image BufferedImage BufferStrategy Kernel ConvolveOp])
+
+  (:use
+   ;;[random-seed.core :refer :all ]
+   [clojure.core.matrix :exclude [log transform scale rotate]]
+   [clojure.core.matrix.operators]))
 
 (refer 'infix.macros :only '[infix])
-(set! *warn-on-reflection* true)
-(set! *unchecked-math* :warn-on-boxed)
-(m/use-primitive-operators)
 
 (set-current-implementation :vectorz)
 
 
+(set! *warn-on-reflection* false)
+(set! *unchecked-math* :warn-on-boxed)
+(m/use-primitive-operators)
 
-(def cnvs (canvas 600 600 :mid))
+(def kernel  (Kernel. 3 3 (float-array [0.05 0.2 0.05
+                                        0.2 -1.0 0.2
+                                        0.05 0.2 0.05])))
 
-(defn draw-rings
-  "Draw rings"
-  [canvas posx posy]
-  (dotimes [x 17]
-    (let [size (* (inc x) 80)]
-      (ellipse canvas posx posy size size true)))
-  canvas)
+
+(defn create-init-pixels
+  [ w  h]
+  (let [vals (map (fn [_] (if (< (^float rand) 0.5) 0 255))
+               (range  (* w h)))]
+    (p/pixels (int-array (flatten (pmap clojure2d.color/gray vals))) w h) ))
+
+
+(defn calculate-next-pixels [pixels]
+  (let [pixels (if (< ^float (rand) 0.5)
+                 (do (p/filter-channels p/horizontal-blur-1 pixels))
+                 (do (p/filter-channels p/vertical-blur-1 pixels)))]
+    pixels))
+
 
 (defn draw
   "Frames"
-  [canvas _ ^long fps _]
-  (let [t (/ fps 60.0) 
-        sa (m/norm (m/qsin (* 0.5 t)) -1.0 1.0 100 500)
-        ca (m/norm (m/qcos t) -1.0 1.0 100 500)
-        sb (m/norm (m/qsin (inc t)) -1.0 1.0 100 500)
-        cb (m/norm (m/qcos (* 2.0 (dec t))) -1.0 1.0 200 500)]
-    (-> canvas
-      (set-background :black)
-      (set-color :white)
-      (xor-mode :black)
-      (set-stroke 20)
-      (draw-rings sb cb)
-      (draw-rings sa ca))))
+  [canvas window frame state]
+  (let [t (/ ^int frame 60.0)
+        next-pixels (calculate-next-pixels state )]
 
-(def window (show-window cnvs "Oldschool XOR" #(draw %1 %2 %3 %4)))
+    (p/set-canvas-pixels! canvas next-pixels)
+    next-pixels))
 
-(defmethod key-pressed [(:window-name window) \space] [_ _]
-  (save cnvs (next-filename "results/ex38/" ".jpg")))
+(def window
+  (let [w 1000
+        h 1000
+        factor 2
+        cnvs (canvas (/ w factor) (/ h factor))
+        init-pixels (create-init-pixels (/ w factor ) (/ h factor)) ]
+    (show-window
+      {:draw-state init-pixels
+       :canvas cnvs
+       :window-name "diffusion reaction"
+       :draw-fn (fn [canvas window frame state]
+                  (draw canvas window frame state))
+       :w w
+       :h h})))
 
-
-
-
-
-
-
-
-
-
-
-
-
+#_(defmethod key-pressed [(:window-name window) \space] [_ _]
+    (save cnvs (next-filename "results/ex38/" ".jpg")))
 
 (def constants {:DA 1.0
                 :DB 0.5
@@ -82,40 +88,8 @@
 (def f 0.055)
 (def k 0.062)
 
-(def kernel [[0.05 0.2 0.05]
-             [0.2 -1.0 0.2]
-             [0.05 0.2 0.05]])
-
 (defn- get-matrix-by-key [matrix key]
   (pmap (fn [row] (pmap key row)) matrix))
-
-
-
-(let [size 50
-      gr (q/create-graphics size size :p2d)]
-                                        ; draw red circle on the graphics
-  (q/with-graphics gr
-    (q/background 255)
-    (q/fill 255 0 0)
-    (q/ellipse (/ size 2) (/ size 2) (* size (/ 2 3)) (* size (/ 2 3))))
-                                        ; draw original graphics
-  (q/image gr 0 0)
-                                        ; get pixels of the graphics and copy
-                                        ; the first half of all pixels to the second half
-  (let [px (q/pixels gr)
-        half (/ (* size size) 2)]
-    (dotimes [i half] (aset-int px (+ i half) (aget px i))))
-  (q/update-pixels gr)
-  (q/image gr (+ size 20) 0)
-                                        ; get pixels of the sketch itself and copy
-                                        ; the first half of all pixels to the second half
-  (let [px (q/pixels)
-        half (/ (* (q/width) (q/height)) 10)]
-    (dotimes [i half] (aset-int px (+ i half) (aget px i))))
-  (q/update-pixels))
-
-
-
 
 (defn make-grid
   [width height]
@@ -123,7 +97,7 @@
     (for [x (range width)]
       (for [y (range height)]
         {:a 1
-         :b (if (< (rand) 0.5) 1 0)}))))
+         :b (if (< (rand) 0.2) 1 0)}))))
 
 (defn neighbors [[x y]]
   (for [dx [-1 0 1]
@@ -153,20 +127,6 @@
                                                               [start-y end-y]])))
                   kernel))])
 
-(def kernel (double-array [0 1 1 2 3 3 0 0 0 0 0 0]))
-(def data (double-array [1 5 7 4 8 3 9 5 6 3 2 1 1 7 4 9 3 2 1 8 6 4]))
-
-(defn convolve [^doubles kernel-array ^doubles data-array]
-  (let [ks (count kernel-array)
-        ds (count data-array)
-        output (double-array (+ ks ds))
-        factor (/ 1.0 (areduce kernel-array i ret 0.0 (+ ret (aget kernel-array i))))]
-    (dotimes [i (int ds)]
-      (dotimes [j (int ks)]
-        (let [offset (int (+ i j))]
-          (aset output offset (+ (aget output offset) (* factor (* (aget data-array i) (aget kernel-array j))))))))
-    output))
-
 (defn next-ab [state [x y] {:keys [a b]}]
   (let [lap-a 1;;(or (laplacian state [x y] :a) 1)
         lap-b 1 ;;(or (laplacian state [x y] :b) 1)
@@ -179,7 +139,7 @@
 (defn next-state [state]
   (emap-indexed (fn [idx val] (next-ab state idx val)) state))
 
-(iterate next-state state)
+(take 10 (iterate next-state state))
 ;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -218,7 +178,8 @@
 
   #_(dorun (run-life 20 112 *blinker*)))
 
-(q/defsketch mandala
+(q/d
+  efsketch mandala
   :host "host"
   :size [100 200]
   :renderer :p3d
@@ -226,12 +187,6 @@
   :update update-state
   :draw draw-state
   :middleware [qm/fun-mode])
-
-
-
-
-
-
 
 (defn draw
   "Draw frame"
@@ -254,8 +209,7 @@
                               (p/filter-channels p/gaussian-blur-2))) ;; operate on pixels directly - blur three channels (skip alpha)
 
       (set-color (- 146.0 ew) (- 199.0 cn) (- 163.0 eh)) ;; set color
-      (ellipse 100 100 ew eh)
-      ))) ;; draw ellipse
+      (ellipse 100 100 ew eh)))) ;; draw ellipse
 
 
 (def window
