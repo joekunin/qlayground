@@ -4,9 +4,10 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :java-source-paths ["src/java"]
-  :dependencies [[org.clojure/clojure "1.10.0"]
+  :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.9.293"]
-                 [quil "2.5.0"]
+                 [quil "3.1.0-SNAPSHOT"]
+                 ;;[quil "2.5.0"]
                  [scad-clj "0.5.2"]
                  [reagent "0.6.0"]
                  ;;[figwheel-sidecar "0.5.0-SNAPSHOT"]
